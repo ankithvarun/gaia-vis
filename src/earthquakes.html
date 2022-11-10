@@ -1,0 +1,52 @@
+<head>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+  <link rel="stylesheet" href="./main.css" />
+
+  <script src="//unpkg.com/d3"></script>
+
+  <script src="//unpkg.com/globe.gl"></script>
+  <!--<script src="../../dist/globe.gl.js"></script>-->
+</head>
+
+<body>
+  <div id="globeViz"></div>
+  <div class="top-info-container">
+    <div style="display: flex; justify-content: center;"></div>
+    <button class="button button1" onclick="location.href='./forestcover.html'" type="button">Forest Cover</button>
+    <button class="button button2" onclick="location.href='./volcanoes.html'" type="button">Volcanoes</button>
+    <button class="button button3" onclick="location.href='./earthquakes.html'" type="button">Earthquakes</button>
+    <button class="button button4" onclick="location.href='./satellites.html'" type="button">Satellites</button>   
+  </div>
+
+  <script>
+    const weightColor = d3.scaleLinear()
+      .domain([0, 60])
+      .range(['lightblue', 'darkred'])
+      .clamp(true);
+
+    const myGlobe = Globe()
+      .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
+      .hexBinPointLat(d => d.geometry.coordinates[1])
+      .hexBinPointLng(d => d.geometry.coordinates[0])
+      .hexBinPointWeight(d => d.properties.mag)
+      .hexAltitude(({ sumWeight }) => sumWeight * 0.0025)
+      .hexTopColor(d => weightColor(d.sumWeight))
+      .hexSideColor(d => weightColor(d.sumWeight))
+      .hexLabel(d => `
+        <b>${d.points.length}</b> earthquakes in the past month:<ul><li>
+          ${d.points.slice().sort((a, b) => b.properties.mag - a.properties.mag).map(d => d.properties.title).join('</li><li>')}
+        </li></ul>
+      `)
+      (document.getElementById('globeViz'));
+
+    fetch('../data/quakes.geojson').then(res => res.json()).then(equakes =>
+    {
+      myGlobe.hexBinPointsData(equakes.features);
+    });
+
+  </script>
+</body>
