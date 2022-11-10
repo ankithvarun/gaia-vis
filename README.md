@@ -17,3 +17,4 @@ The tool currently uses the following datasets:
 - `forestcover.geojson` - Forest cover data for the year 2015. The data is sourced from [here](https://www.naturalearthdata.com/downloads/) and [here](https://github.com/nvkelso/natural-earth-vector/tree/master) for country-wise data [here](https://ourworldindata.org/forest-area) for forest cover data.
 - `volcanoes.json` - The data is sourced from [here](https://volcano.oregonstate.edu/volcano_table).
 - `satellites.txt` - The data is sourced from [here](https://www.space-track.org/documentation#tle).
+- `quakes.geojson` - The data is sourced from [here](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php).
