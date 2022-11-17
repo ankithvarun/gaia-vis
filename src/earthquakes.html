@@ -2,9 +2,106 @@
   <style>
     body {
       margin: 0;
+      color: white;
     }
+    .split {
+      height: 100%;
+      width: 50%;
+      position: fixed;
+      top: 0;
+    }
+    .left {
+      left: 0;
+      background-color: #111;
+    }
+    .right {
+      right: 0;
+    }
+   
+    h1 {
+      color: white;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 300;
+    }
+
+    .cn {
+      display: flex;
+      justify-content: center;
+      align-items: center; 
+    }
+
+  .overlay {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 5rem;
+
+  }
+  
+  .overlay__inner {
+    max-height: 100vh;
+    max-width: 36rem;
+    padding: 10rem;
+  }
+  
+  .overlay__title {
+    font-size: 1.875rem;
+    line-height: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+  
+  .overlay__description {
+    font-size: 1rem;
+    line-height: 1.75rem;
+    margin-bottom: 3rem;
+  }
+  
+  @media (prefers-contrast: high) {
+    .orb-canvas {
+      display: none;
+    }
+  }
+  
+  @media only screen and (max-width: 1140px) {
+    .overlay {
+      padding: 8rem 4rem;
+    }
+  }
+  
+  @media only screen and (max-width: 840px) {
+    body {
+      padding: 1.5rem;
+    }
+  
+    .overlay {
+      padding: 4rem;
+      height: auto;
+    }
+  
+    .overlay__title {
+      font-size: 1.25rem;
+      line-height: 2rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    .overlay__description {
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .overlay {
+      padding: 1.5rem;
+    }
+  }
+
   </style>
   <link rel="stylesheet" href="./main.css" />
+  <link rel="stylesheet" href="./earthquakes.css" />
 
   <script src="//unpkg.com/d3"></script>
 
@@ -13,23 +110,111 @@
 </head>
 
 <body>
-  <div id="globeViz"></div>
-  <div class="top-info-container">
-    <div style="display: flex; justify-content: center;"></div>
-    <button class="button button1" onclick="location.href='./forestcover.html'" type="button">Forest Cover</button>
-    <button class="button button2" onclick="location.href='./volcanoes.html'" type="button">Volcanoes</button>
-    <button class="button button3" onclick="location.href='./earthquakes.html'" type="button">Earthquakes</button>
-    <button class="button button4" onclick="location.href='./satellites.html'" type="button">Satellites</button>   
+  <div class="split left cn" style="overflow: auto;">
+    <div class="overlay">
+      <!-- Overlay inner wrapper -->
+      <div class="overlay__inner">
+        <!-- Title -->
+        <h1 class="overlay__title">
+          EARTHQUAKES DATASET INSIGHTS
+        </h1>
+        <!-- Description -->
+        <p class="overlay__description">
+          We have visualised all the earthquakes that have occurred in the past month across all the countries.
+          <strong>A json file has been used to gather the data.</strong>
+        </p>
+
+        <h3 class="overlay__title">
+          2D Visualisations
+        </h3>
+
+        <div>
+          <canvas id="mag" width="800" height="600"></canvas>
+          <br>
+          <br>
+          <br>
+          <canvas id="top10" width="800" height="800"></canvas>
+        </div>
+        <br>
+
+        <h3 class="overlay__title">
+          STATISTICS
+        </h3>
+        
+        <div class="container">
+          <div class="card">
+            <h3 class="title"> No. of Tsunamis Caused</h3>
+            <div class="bar">
+              <div class="emptybar"></div>
+              <div class="filledbar"></div>
+            </div>
+            <div class="circle">
+              <p> 16 </p>
+            </svg>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="title">Card 2</h3>
+            <div class="bar">
+              <div class="emptybar"></div>
+              <div class="filledbar"></div>
+            </div>
+            <div class="circle">
+              
+            </svg>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="title">Card 3</h3>
+            <div class="bar">
+              <div class="emptybar"></div>
+              <div class="filledbar"></div>
+            </div>
+            <div class="circle">
+              
+            </svg>
+            </div>
+          </div>
+          <div class="card">
+            <h3 class="title">Card 4</h3>
+            <div class="bar">
+              <div class="emptybar"></div>
+              <div class="filledbar"></div>
+            </div>
+            <div class="circle">
+
+            </svg>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="split right">
+    <div id="globeViz"></div>
+    <div class="top-info-container">
+
+      
+      <div style="display: flex; justify-content: center;"></div>
+      <button class="button button1" onclick="location.href='./forestcover.html'" type="button">Forest Cover</button>
+      <button class="button button2" onclick="location.href='./volcanoes.html'" type="button">Volcanoes</button>
+      <button class="button button3" onclick="location.href='./earthquakes.html'" type="button">Earthquakes</button>
+      <button class="button button4" onclick="location.href='./satellites.html'" type="button">Satellites</button>   
+    </div>
   </div>
 
   <script>
     const weightColor = d3.scaleLinear()
-      .domain([0, 60])
+      .domain([0, 100])
       .range(['lightblue', 'darkred'])
       .clamp(true);
 
     const myGlobe = Globe()
       .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
+      .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+      .width(1000)
       .hexBinPointLat(d => d.geometry.coordinates[1])
       .hexBinPointLng(d => d.geometry.coordinates[0])
       .hexBinPointWeight(d => d.properties.mag)
@@ -49,4 +234,7 @@
     });
 
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="earthquakes.js"></script>
 </body>
