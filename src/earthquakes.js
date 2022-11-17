@@ -1,11 +1,7 @@
-// function to get number of light, average, and heavy 
-
-// call geteq function on document load
 document.addEventListener('DOMContentLoaded', geteq);
 document.addEventListener('DOMContentLoaded', gettop10);
 
 function geteq() {
-   console.log("geteq called\n");
    fetch('../data/quakes.geojson')
    .then(res => res.json())
    .then(feat =>
@@ -28,9 +24,9 @@ function geteq() {
          }
    );
 }
+
 // get top 10 highest earthquakes along with place
 function gettop10() {
-   console.log("gettop10 called\n");
    fetch('../data/quakes.geojson')
    .then(res => res.json())
    .then(feat =>
@@ -48,16 +44,13 @@ function gettop10() {
                   top10places.push(feat.features[i].properties.place);
                }
             }
-            console.log(top10places);
             drawbar(top10, top10places, 'top10');
          }
    );
 }
 
 // function to draw pie chart
-
 function drawpie(light, average, heavy, cont) {
-   console.log("drawpie called\n");
    var ctx = document.getElementById('mag').getContext('2d');
    new Chart(ctx, {
       type: 'pie',
@@ -99,9 +92,14 @@ function drawpie(light, average, heavy, cont) {
          plugins: {
             datalabels: {
                 formatter: (value, ctx) => {
-                  let sum = ctx.dataset._meta[0].total;
-                  let percentage = (value * 100 / sum).toFixed(2) + "%";
+                  let datasets = ctx.chart.data.datasets;
+                  if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
+                  let sum = datasets[0].data.reduce((a, b) => a + b, 0);
+                  let percentage = Math.round((value / sum) * 100) + '%';
                   return percentage;
+                  } else {
+                  return percentage;
+                  }
                 },
                 color: '#fff',
             }
@@ -111,9 +109,7 @@ function drawpie(light, average, heavy, cont) {
 }
 
 // function to draw bar graph for top 10 highest earthquakes
-
 function drawbar(top10, top10places, cont) {
-   console.log("drawbar called\n");
    var ctx = document.getElementById('top10').getContext('2d');
    new Chart(ctx, {
       type: 'horizontalBar',
@@ -154,7 +150,7 @@ function drawbar(top10, top10places, cont) {
          responsive: true,
          title: {
             display: true,
-            text: 'Top 10 Earthquakes',
+            text: 'Top 10 Earthquakes (Magnitude)',
             fontSize: 20,
             position: 'top',
             fontColor: 'white'
@@ -179,7 +175,12 @@ function drawbar(top10, top10places, cont) {
                   fontSize: 15,
                   align: 'right',
                   padding: -20
-
+               },
+               scaleLabel: {
+                  display: true,
+                  labelString: 'Region',
+                  fontColor: 'white',
+                  fontSize: 15
                }
             }],
             xAxes: [{
@@ -193,7 +194,12 @@ function drawbar(top10, top10places, cont) {
                   max: 8,
                   weight: 5,
                },
-               // backgroundColor: white,
+               scaleLabel: {
+                  display: true,
+                  labelString: 'Magnitude (Richter Scale)',
+                  fontColor: 'white',
+                  fontSize: 15
+               }
             }],
             x: {
                grid: {
@@ -204,35 +210,4 @@ function drawbar(top10, top10places, cont) {
          }
       }
    }, 250);
-}
-
-
-// This function is called when data is processed and a graph is to be drawn
-function drawline(subject, cont) {
-    console.log("Drawline function called\n");
-    const ctx=document.getElementById(cont);
-    ctx.width+=0;
-    console.log(dat);
-    setTimeout(() => {
-        // console.log(dat);
-        const myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: dat.map(d => d.year),
-                datasets: [{
-                    label: subject,
-                    data: dat.map(d => d.value),
-                    backgroundColor: [
-                        'rgba(0, 180, 100, 0.75',
-                        // 'rgba(0, 180, 100, 0)',
-                    ],
-                    borderColor: [
-                        'rgba(190, 20, 50, 1)',
-                    ],
-                    borderWidth: 5
-                    // if(ty=='bar') {}
-                }]
-            },
-        });
-    }, 250);
 }
