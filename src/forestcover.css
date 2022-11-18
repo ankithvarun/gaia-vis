@@ -9,7 +9,9 @@
 }
 
 /* from below */
-
+::-webkit-scrollbar {
+  width: 2px;
+}
 body {
     margin: 0;
     color: white;
