@@ -17,6 +17,7 @@
 		}
 	</style>
 	<link rel="stylesheet" href="./main.css" />
+	<link rel="stylesheet" href="./satellites.css" />
 	<script src="//unpkg.com/three"></script>
 	<script src="//unpkg.com/satellite.js/dist/satellite.min.js"></script>
 	<script src="//unpkg.com/globe.gl"></script>
@@ -35,5 +36,60 @@
 		<button class="button button3" onclick="location.href='./earthquakes.html'" type="button">Earthquakes</button>
 		<button class="button button4" onclick="location.href='./satellites.html'" type="button">Satellites</button>
     <script src="./satellites.js"></script>
+	</div>
+	<div class="split left cn" style="overflow: auto;">
+		<div class="overlay">
+			<div class="overlay__inner">	
+			<h1 class="overlay__title">
+			  Satellite Dataset Insights
+			</h1>
+			<p class="overlay__description">
+			A two-line element set (TLE) is a data format encoding a list of orbital elements of an Earth-orbiting object for a given point in time, the epoch. Using a suitable prediction formula, the state (position and velocity) at any point in the past or future can be estimated to some accuracy.
+			The estimated data can be used to visualize the trajectory of the satellite.
+			</p>
+			
+			<br>
+	
+			<h3>
+			  Drag & Debris
+			</h3>
+
+			Rising carbon dioxide levels at the edge of space are apparently 
+			reducing the pull that Earth's atmosphere has on satellites and space junk.
+
+			However, in the highest reaches of the atmosphere, carbon dioxide can actually 
+			have a cooling effect. The main effects of carbon dioxide up there come from its 
+			collisions with oxygen atoms. These impacts excite carbon dioxide molecules, making 
+			them radiate heat. The density of carbon dioxide is too thin above altitudes of about 
+			30 miles (50 kilometers) for the molecules to recapture this heat, which means it 
+			mostly escapes to space, chilling the outermost atmosphere. 
+
+			<!-- embed image -->
+			<br><br>
+
+			<img src="../images/satellites_stats.png" alt="Satellite" style="align-self: center;">
+
+		</div>
+		</div>
+	</div>
+	<div class="legend cn bottom">
+		<div class="overlay" style="padding-top: 2rem">
+			<div class="overlay__inner">
+			<table>
+			  <tr>
+				<td><div class="legend__color" style="background-color: #ff0000"></div></td>
+				<td>LANDSAT - 8</td>
+			  </tr>
+			  <tr>
+				<td><div class="legend__color" style="background-color: #00ff00"></div></td>
+				<td>SENTINEL - 7</td>
+			  </tr>
+			  <tr>
+				<td><div class="legend__color" style="background-color: #0000ff"></div></td>
+				<td>ISS - 1</td>
+			  </tr>
+
+
+		</div>
 	</div>
 </body>
