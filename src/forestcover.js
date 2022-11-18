@@ -6,6 +6,7 @@ var output = document.getElementById("demo");
 var markcountry=document.getElementById("bestcountry");
 let world;
 output.innerHTML = slider.value;
+var viewport_width = window.innerWidth;
 var cur_slider_value = slider.value;
 var greencountry;
 
@@ -49,7 +50,7 @@ function init()
 			.globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
 			.backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
 			.lineHoverPrecision(0)
-            .width(1000)
+            .width(viewport_width*0.5)
 			.polygonsData(countries.features.filter(d => d.properties.ISO_A2 !== 'AQ'))
 			.polygonAltitude(0.06)
 			.polygonCapColor(feat => colorScale(getVal(feat)))

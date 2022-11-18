@@ -4,10 +4,9 @@ body {
   }
   
   .split {
-    height: 85%;
     width: 50%;
     position: fixed;
-    top: 120px;
+  
     margin-bottom: 2rem;
   }
   
@@ -62,7 +61,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 15rem;
+    padding-top: 5rem;
   }
   
   .overlay__inner {
