@@ -15,6 +15,7 @@ const timeLogger = document.getElementById('time-log');
 
 const world = Globe()
 	(document.getElementById('chart'))
+	.width(2800)
 	.globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
 	.objectLat('lat')
 	.objectLng('lng')
@@ -22,7 +23,6 @@ const world = Globe()
 	.objectLabel('name');
 
 setTimeout(() => world.pointOfView({ altitude: 3.5 }));
-
 
 function randomMaterial(i)
 {
@@ -80,8 +80,17 @@ fetch('../data/satellites.txt').then(r => r.text()).then(rawData =>
 				const gdPos = satellite.eciToGeodetic(eci.position, gmst);
 				d.lat = satellite.radiansToDegrees(gdPos.latitude);
 				d.lng = satellite.radiansToDegrees(gdPos.longitude);
-				d.alt = gdPos.height / EARTH_RADIUS_KM
+				d.alt = gdPos.height / EARTH_RADIUS_KM				
+				console.log(d.name)
+				console.log(gdPos.height)
 			}
+
+			// console.log(d.satrec.no * 229.183)
+
+			// Get speed from velocity
+		
+			// console.log(eci)
+
 		});
 
 		world.objectsData(satData);
