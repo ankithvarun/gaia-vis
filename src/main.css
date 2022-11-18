@@ -83,6 +83,15 @@ body {
 	position: absolute;
 	text-align: center;
 	width: 100%;
+	right: 0;
+}
+
+.left-info-container {
+	z-index: 1;
+	top: 120px;
+	position: absolute;
+	text-align: center;
+	width: 40%;
 }
 
 .button {
