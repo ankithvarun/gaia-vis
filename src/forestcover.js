@@ -73,7 +73,21 @@ function init()
         world.width([event.target.innerWidth])
         world.height([event.target.innerHeight])
       });
-	gettotal();
+    // gettotal();
+    // getmaxdiff();
+    // getyearly();
+    setTimeout(() =>
+    {
+        gettotal();
+    }, 250);
+    setTimeout(() =>
+    {
+        getyearly();
+    }, 250);
+    setTimeout(() =>
+    {
+        getmaxdiff();
+    }, 250);
 	getmaxdiff();
 	getyearly();
     // display the string greencountry in markcountry
