@@ -2,12 +2,19 @@ body {
     margin: 0;
     color: white;
   }
-  
+    a:-webkit-any-link {
+      color: #25b2bc;
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-line: underline;
+      text-decoration-thickness: initial;
+      text-decoration-style: initial;
+      text-decoration-color: #25b2bc;
+    }
   .split {
-    height: 85%;
     width: 50%;
     position: fixed;
-    top: 120px;
+  
     margin-bottom: 2rem;
   }
   
@@ -16,6 +23,9 @@ body {
     background-color: #111;
   }
   
+    ::-webkit-scrollbar {
+      width: 2px;
+    }
   .right {
     right: 0;
   }
@@ -62,7 +72,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 15rem;
+    padding-top: 5rem;
   }
   
   .overlay__inner {

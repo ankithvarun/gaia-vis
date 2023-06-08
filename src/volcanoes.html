@@ -1,7 +1,106 @@
+
 <head>
 	<style>
 		body {
 			margin: 0;
+			color: white;
+		}
+
+		.split {
+			height: 100%;
+			width: 50%;
+			position: fixed;
+			top: 0;
+		}
+
+		.left {
+			left: 0;
+			background-color: #111;
+		}
+
+		.right {
+			right: 0;
+		}
+
+		h1 {
+			color: white;
+			text-align: center;
+			font-size: 30px;
+			font-weight: 300;
+		}
+
+		.cn {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.overlay {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			padding-top: 5rem;
+
+		}
+
+		.overlay__inner {
+			max-height: 100vh;
+			max-width: 36rem;
+			padding: 10rem;
+		}
+
+		.overlay__title {
+			font-size: 1.875rem;
+			line-height: 2.75rem;
+			font-weight: 700;
+			letter-spacing: -0.025em;
+		}
+
+		.overlay__description {
+			font-size: 1rem;
+			line-height: 1.75rem;
+			margin-bottom: 3rem;
+		}
+
+		@media (prefers-contrast: high) {
+			.orb-canvas {
+				display: none;
+			}
+		}
+
+		@media only screen and (max-width: 1140px) {
+			.overlay {
+				padding: 8rem 4rem;
+			}
+		}
+
+		@media only screen and (max-width: 840px) {
+			body {
+				padding: 1.5rem;
+			}
+
+			.overlay {
+				padding: 4rem;
+				height: auto;
+			}
+
+			.overlay__title {
+				font-size: 1.25rem;
+				line-height: 2rem;
+				margin-bottom: 1.5rem;
+			}
+
+			.overlay__description {
+				font-size: 0.875rem;
+				line-height: 1.5rem;
+				margin-bottom: 2.5rem;
+			}
+		}
+
+		@media only screen and (max-width: 600px) {
+			.overlay {
+				padding: 1.5rem;
+			}
 		}
 	</style>
 	<link rel="stylesheet" href="./main.css" />
@@ -10,18 +109,133 @@
 	<script src="//unpkg.com/polished@3.5.2/dist/polished.js"></script>
 
 	<script src="//unpkg.com/globe.gl"></script>
-	<!--<script src="../../dist/globe.gl.js"></script>-->
 </head>
 
 <body>
-	<div id="globeViz"></div>
-	<div class="top-info-container">
-		<div style="display: flex; justify-content: center;"></div>
-		<button class="button button1" onclick="location.href='./forestcover.html'" type="button">Forest Cover</button>
-		<button class="button button2" onclick="location.href='./volcanoes.html'" type="button">Volcanoes</button>
-		<button class="button button3" onclick="location.href='./earthquakes.html'" type="button">Earthquakes</button>
-		<button class="button button4" onclick="location.href='./satellites.html'" type="button">Satellites</button>
+	<div class="split left cn" style="overflow: auto;">
+		<div class="overlay">
+
+			<div class="overlay__inner">
+				<h1 class="overlay__title">
+					VOLCANOES DATASET INSIGHTS
+				</h1>
+				<p class="overlay__description">
+					World Volcanoes visualisation.
+					<strong>A json file has been used to gather the data.</strong>
+				</p>
+
+				<h3 class="overlay__title">
+					Volcanoes
+				</h3>
+				<br>
+				<br>
+				<br>
+				<br>
+				<h3>
+					Ring of Fire
+				</h3>
+				<br>
+				<div>
+					<p>
+						The Ring of Fire is a region around the rim of the Pacific Ocean where many volcanic eruptions occur. 
+						It is caused due to the movement and collision of lithospheric plates (the Pacific Plate).
+						Most of Earth's active volcanoes are located in the Ring of Fire and many of them are stratovolcanoes.
+					</p>
+				</div>
+				<br>
+				<br>
+				<div>
+					<br>
+					<canvas id="perCountry" width="800" height="800"></canvas>
+					<br>
+				</div>
+				<div>
+					<br>
+					<canvas id="types" width="800" height="600"></canvas>
+					<br>
+					<br>
+					<br>
+					<p>
+						Different volcano types are formed based on certain properties of the magma: 
+    					<li>
+							the viscosity, or stickiness, of the magma
+						</li>
+						<li>
+							the amount of gas in the magma
+						</li>
+						<li>
+							the composition of the magma
+						</li>
+						<li>
+							the way in which the magma reached the surface
+						</li>
+					</p>
+					<br>
+					<br>
+
+					<h3>
+						Stratovolcanoes
+					</h3>
+					<br>
+					<p>
+						Stratovolcanoes (or composite volcano) have steep sides and are conical with many layers. Their lava is extremely viscous, i.e it does not flow easily.
+						The lava builds up around the vent of the volcano, which leads to steep sides. 
+						Stratovolcanoes often have explosive and effusive eruptions because of gas build up in the viscous lava.
+						Stratovolcanoes are mostly found along plate tectonic boundaries (oceanic crust is under continental crust). Eg: Japan, Philippines, Aleutian Islands.
+					</p>
+
+					<br>
+					<br>
+
+					<h3>
+						Calderas
+					</h3>
+					<br>
+					<p>
+						Large eruptions that empty the magma chamber can cause the roof of the magma chamber to collapse and form a depression.
+						This is called a caldera. Calderas can be formed from explosive eruptions that can remove the summit of a stratovolcano.
+						Eg: Crater Lake, USA
+					</p>
+
+					<br>
+					<br>
+
+					<h3>
+						Shield
+					</h3>
+					<br>
+					<p>
+						Shield volcanoes have low viscosity lava (i.e it spreads easily). Because the lava spreads it forms a volcano with gentle slopes. 
+						Repeated eruptions lead to the accumulation of lava, building up the volcano.
+						Shield volcanoes are some of the biggest in the world.
+						Eg: Mauna Kea and Mauna Loa, Hawaii, USA
+					</p>
+				</div>
+				<br>
+
+
+
+			</div>
+		</div>
+	</div>
 	</div>
 
+	<div class="split right">
+		<div id="globeViz"></div>
+		<div class="top-info-container">
+
+
+			<div style="display: flex; justify-content: center;"></div>
+			<button class="button button1" onclick="location.href='./forestcover.html'" type="button">Forest
+				Cover</button>
+			<button class="button button2" onclick="location.href='./volcanoes.html'" type="button">Volcanoes</button>
+			<button class="button button3" onclick="location.href='./earthquakes.html'"
+				type="button">Earthquakes</button>
+			<button class="button button4" onclick="location.href='./satellites.html'" type="button">Satellites</button>
+			<button class="button button4" onclick="location.href='./pnas.html'" type="button">Custom</button>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="./volcanoes.js"></script>
 </body>

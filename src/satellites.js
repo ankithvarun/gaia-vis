@@ -15,7 +15,7 @@ const timeLogger = document.getElementById('time-log');
 
 const world = Globe()
 	(document.getElementById('chart'))
-	.width(2800)
+	.width(1000)
 	.globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
 	.objectLat('lat')
 	.objectLng('lng')
